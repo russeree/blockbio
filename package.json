@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type":"module",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/russeree/blockbio.git"
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/russeree/blockbio#readme",
   "dependencies": {
     "dotenv": "^16.0.1",
+    "es-main": "^1.0.2",
     "twitter-api-v2": "^1.12.2"
   }
 }
