@@ -16,14 +16,15 @@ class BlockBio{
         });
         this.coinGeckoClient = new CoinGecko();
     }
-    async getBio(){
+    async setPriceBio(){
         let geckoData = await this.coinGeckoClient.exchanges.fetchTickers('bitfinex', {
             coin_ids: ['bitcoin']
         });
         for(let ticker of geckoData.data.tickers){
             if(ticker.target == 'USD'){
-                await this.client.v1.updateAccountProfile({description: `${this.bioText} - Last BTC/USD $${parseInt(ticker.last).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`});
-                console.log(ticker);
+                let priceText = parseInt(ticker.last).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                console.log(`Updated bio price with a value of $${priceText}`)
+                await this.client.v1.updateAccountProfile({description: `${this.bioText} - Last BTC/USD $${priceText}`});
             }
         }
     }
@@ -35,8 +36,8 @@ class BlockBio{
         let blockBio = new BlockBio('#bitcoin - custom bitcoin core .23 node operator and contributor - programming - self taught maker and investor - no price talk');
         for(;;){
             try{
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                await blockBio.getBio();
+                await blockBio.setPriceBio();
+                await new Promise(resolve => setTimeout(resolve, 60000));
             }
             catch{e=>{
                 console.log(`Failed to write Twitter profile description with error: ${e}`);
