@@ -15,13 +15,14 @@ the latest USD/BTC pair price priced from CoinGecko. This script is meant to be 
 
 To customize this script to fit your needs edit the class constructor argument for `BlockBio` to fit your profile 'bio' please remember the 160 char limit on your bio. The addition of the price and timestamp consumes ~35 characters when the timezone is included. 
 
-There also needs to be a .env file inyour project directory of the format ...
-`
+There also needs to be a `.env` file inyour project directory of the format ...
+
+```
 TWITTER_API_KEY="api_key"
 TWITTER_API_KEY_SECRET="api_key_secret"
-TWITTER_ACCESS_TOKEN=
-TWITTER_ACCESS_TOKEN_SECRET=
-`
+TWITTER_ACCESS_TOKEN="access_token"
+TWITTER_ACCESS_TOKEN_SECRET="access_token_secret"
+```
 
 This project is a non-production release designed to just be a **proof of concept**. 
 
