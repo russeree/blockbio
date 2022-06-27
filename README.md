@@ -1,2 +1,1 @@
-# blockbio
-Current Bitcoin timechain height added to your Twitter Bio
+# Blockbio - Bitcoin Price for Your Twitter Bio
