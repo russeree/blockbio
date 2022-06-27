@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/russeree/blockbio#readme",
   "dependencies": {
+    "coingecko-api": "^1.0.10",
     "dotenv": "^16.0.1",
     "es-main": "^1.0.2",
     "twitter-api-v2": "^1.12.2"
