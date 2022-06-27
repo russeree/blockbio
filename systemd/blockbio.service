@@ -1,0 +1,20 @@
+[Unit]
+Description=Twitter Blockbio Script - Twitter 'Description' Service
+Documentation=https://github.com/russeree/blockbio
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/node /opt/bitcoin/git/blockbio/app.js
+WorkingDirectory=/opt/bitcoin/git/blockbio
+User=bitcoin
+Group=bitcoin
+Restart=always
+RestartSec=5s
+Enviorment=NODE_ENV=production
+Type=simple
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=blockbio.twitter
+
+[Install]
+WantedBy=multi-user.target
