@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import {TwitterApi} from 'twitter-api-v2';
 import esMain from 'es-main';
 import CoinGecko from 'coingecko-api';
+import bitcoin_rpc from 'node-bitcoin-rpc';
 
 dotenv.config();
 
@@ -26,7 +27,7 @@ class BlockBio{
                 let cTimeStamp = `${current.toLocaleDateString()} ${current.toLocaleTimeString()}`;
                 let priceText = parseInt(ticker.last).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 console.log(`Updated bio price with a value of $${priceText}`)
-                await this.client.v1.updateAccountProfile({description: `${this.bioText}last BTC/USD $${priceText} - ${cTimeStamp} PST`});
+                await this.client.v1.updateAccountProfile({description: `${this.bioText} BTC/USD $${priceText} - ${cTimeStamp} PST`});
             }
         }
     }
@@ -35,7 +36,7 @@ class BlockBio{
 (async()=>{
     if(esMain(import.meta)){
         console.log(`Running BlockBio as 'main()' - Enjoy`)
-        let blockBio = new BlockBio('#bitcoin - custom bitcoin core .23 node operator and contributor - programming - self taught maker - ');
+        let blockBio = new BlockBio('#bitcoin - custom bitcoin core .23 node operator and contributor - programming - self taught maker ⚡ ');
         for(;;){
             try{
                 await blockBio.setPriceBio();
