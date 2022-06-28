@@ -2,7 +2,7 @@
   "name": "blockbio",
   "version": "0.0.1",
   "description": "Bitcoin timechain height added to your Twitter bio.",
-  "main": "app.js",
+  "main": "blockbio.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
