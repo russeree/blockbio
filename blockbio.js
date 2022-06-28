@@ -49,7 +49,7 @@ class BlockBio{
         let mempoolInfo = await this.btcCoreDirectRPC('getmempoolinfo');
         let mempoolSizeMB = (mempoolInfo.result.bytes/1000000).toFixed(2);
         console.log(`Updating Twitter description with block height ${timechainInfo.result.blocks}`)
-        await this.client.v1.updateAccountProfile({description: `${this.bioText} - chain height ${timechainInfo.result.blocks} - Mempool Size ${mempoolSizeMB} MB`});
+        await this.client.v1.updateAccountProfile({description: `${this.bioText} - 🟧 timechain height ${timechainInfo.result.blocks} - Mempool Size ${mempoolSizeMB} MB`});
     }
     /**
      *Get the current bitcoin core node mempool info.
@@ -71,7 +71,7 @@ class BlockBio{
 (async()=>{
     if(esMain(import.meta)){
         console.log(`Running BlockBio as 'main()' - Enjoy`)
-        let blockBio = new BlockBio('#bitcoin - custom bitcoin core .23 node operator and contributor - programming - self taught maker ');
+        let blockBio = new BlockBio('#bitcoin - custom btc core .23 node operator & contributor - programming - self taught maker ');
         for(;;){
             try{
                 await blockBio.setNodeBio();
