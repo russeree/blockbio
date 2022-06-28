@@ -1,4 +1,4 @@
-# Blockbio 🐦 Bitcoin timechain info for Your Twitter Bio
+# Blockbio 🐦 Bitcoin Timechain Info for Your Twitter Bio
 
 ## Inspiration
 This project was formed out of a weekend warmup exercise with the goal 
