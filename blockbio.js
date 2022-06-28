@@ -16,6 +16,16 @@ class BlockBio{
             accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET
         });
         this.coinGeckoClient = new CoinGecko();
+        this.initBitcoinRPC();
+    }
+    initBitcoinRPC(){
+        bitcoin_rpc.init(
+            process.env.BITCOIN_NODE_HOST,
+            process.env.BITCOIN_NODE_PORT,
+            process.env.BITCOIN_NODE_USERNAME,
+            process.env.BITCOIN_NODE_PASSWORD
+        )
+        bitcoin_rpc.setTimeout(30000);
     }
     async setPriceBio(){
         let geckoData = await this.coinGeckoClient.exchanges.fetchTickers('bitfinex', {
@@ -31,21 +41,46 @@ class BlockBio{
             }
         }
     }
+    /**
+     * Updates a twitter bio by appending mempool/timechain info.
+     */
+    async setNodeBio(){
+        let timechainInfo = await this.btcCoreDirectRPC('getblockchaininfo');
+        let mempoolInfo = await this.btcCoreDirectRPC('getmempoolinfo');
+        let mempoolSizeMB = (mempoolInfo.result.bytes/1000000).toFixed(2);
+        console.log(`Updating Twitter description with block height ${timechainInfo.result.blocks}`)
+        await this.client.v1.updateAccountProfile({description: `${this.bioText} - chain height ${timechainInfo.result.blocks} - Mempool Size ${mempoolSizeMB} MB`});
+    }
+    /**
+     *Get the current bitcoin core node mempool info.
+     */
+    async btcCoreDirectRPC(command, args = []){
+        return new Promise((resolve, reject)=>{
+            bitcoin_rpc.call(command,args,(err,res)=>{
+                if(err !== null){
+                    reject(err);
+                }
+                else{
+                    resolve(res);
+                }
+            });
+        });
+    }
 }
 
 (async()=>{
     if(esMain(import.meta)){
         console.log(`Running BlockBio as 'main()' - Enjoy`)
-        let blockBio = new BlockBio('#bitcoin - custom bitcoin core .23 node operator and contributor - programming - self taught maker ⚡ ');
+        let blockBio = new BlockBio('#bitcoin - custom bitcoin core .23 node operator and contributor - programming - self taught maker ');
         for(;;){
             try{
-                await blockBio.setPriceBio();
+                await blockBio.setNodeBio();
             }
             catch{e=>{
                 console.log(`Failed to write Twitter profile description with error: ${e}`);
             }}
             finally{
-                await new Promise(resolve => setTimeout(resolve, 180000));
+                await new Promise(resolve => setTimeout(resolve, 5000));
             }
         }
     }
