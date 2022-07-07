@@ -27,6 +27,7 @@
   "homepage": "https://github.com/russeree/blockbio#readme",
   "dependencies": {
     "bitcoind-rpc": "^0.9.1",
+    "canvas": "^2.9.3",
     "coingecko-api": "^1.0.10",
     "dotenv": "^16.0.1",
     "es-main": "^1.0.2",
